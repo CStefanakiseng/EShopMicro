@@ -4,6 +4,11 @@ services:
   eshopmicro_catalog_db:
     image: mongo
 
+  eshopmicro_basket_db:
+    image: redis:alpine
+  
+  eshopmicro_portainer:
+    image: portainer/portainer-ce
 
   eshopmicro_catalog_api:
     image: ${DOCKER_REGISTRY-}eshopmicrocatalogapi
@@ -11,6 +16,14 @@ services:
       context: .
       dockerfile: Services/Catalog/EShopMicro.Catalog.API/Dockerfile
 
+  eshopmicro_basket_api:
+    image: ${DOCKER_REGISTRY-}eshopmicrobasketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/EShopMicro.Basket.API/Dockerfile
+
 volumes:
   mongo_data:
+  portainer_data:
   
+

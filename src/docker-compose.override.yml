@@ -1,6 +1,7 @@
 version: '3.4'
 
 services:
+
   eshopmicro_catalog_db:
     container_name: eshopmicro_catalog_db  
     restart: always
@@ -8,6 +9,14 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db      
+
+  eshopmicro_basket_db:
+    container_name: eshopmicro_basket_db
+    restart: always
+    ports: 
+      - "6379:6379"
+
+
 
   eshopmicro_catalog_api:
     container_name: eshopmicro_catalog_api
@@ -17,4 +26,26 @@ services:
     depends_on:
       - eshopmicro_catalog_db
     ports:
-      - "19000:80"
+      - "19010:80"
+
+  eshopmicro_basket_api:
+    container_name: eshopmicro_basket_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=eshopmicro_basket_db:6379"
+    depends_on:
+      - eshopmicro_basket_db
+    ports:
+      - "19011:80"
+
+
+  eshopmicro_portainer:
+    container_name: eshopmicro_portainer
+    restart: always
+    ports: 
+      - "18000:8000"
+      - "19000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
