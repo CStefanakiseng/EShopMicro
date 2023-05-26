@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  eshopmicro_catalog_db:
+    image: mongo
+
+
+  eshopmicro_catalog_api:
+    image: ${DOCKER_REGISTRY-}eshopmicrocatalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/EShopMicro.Catalog.API/Dockerfile
+
+volumes:
+  mongo_data:
+  
