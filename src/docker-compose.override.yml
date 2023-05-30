@@ -16,7 +16,38 @@ services:
     ports: 
       - "6379:6379"
 
+  eshopmicro_discount_db:
+    container_name: eshopmicro_discount_db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=DiscountDb
+    restart: always
+    ports: 
+      - "15432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+  
+  eshopmicro_pgadmin:
+    container_name: eshopmicro_pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "15050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
 
+  eshopmicro_portainer:
+    container_name: eshopmicro_portainer
+    restart: always
+    ports: 
+      - "18000:8000"
+      - "19000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
   eshopmicro_catalog_api:
     container_name: eshopmicro_catalog_api
@@ -38,14 +69,13 @@ services:
     ports:
       - "19011:80"
 
-
-  eshopmicro_portainer:
-    container_name: eshopmicro_portainer
-    restart: always
-    ports: 
-      - "18000:8000"
-      - "19000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+  eshopmicro_discount_api:
+    container_name: eshopmicro_discount_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=Server=eshopmicro_discount_db;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234" 
+    depends_on:
+      - eshopmicro_discount_db
+    ports:
+      - "19012:80"
 

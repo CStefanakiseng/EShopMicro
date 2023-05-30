@@ -6,6 +6,12 @@ services:
 
   eshopmicro_basket_db:
     image: redis:alpine
+
+  eshopmicro_discount_db:
+    image: postgres
+
+  eshopmicro_pgadmin:
+    image: dpage/pgadmin4
   
   eshopmicro_portainer:
     image: portainer/portainer-ce
@@ -22,8 +28,17 @@ services:
       context: .
       dockerfile: Services/Basket/EShopMicro.Basket.API/Dockerfile
 
+  eshopmicro_discount_api:
+    image: ${DOCKER_REGISTRY-}eshopmicrodiscountapi
+    build:
+      context: .
+      dockerfile: Services/Discount/EShopMicro.Discount.API/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
+  postgres_data:
+  pgadmin_data:
   
+
 
