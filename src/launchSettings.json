@@ -6,7 +6,9 @@
       "serviceActions": {
         "eshopmicro.catalog.api": "StartDebugging",
         "eshopmicro.basket.api": "StartDebugging",
-        "eshopmicro.discount.api": "StartDebugging"
+        "eshopmicro.discount.api": "StartDebugging",
+        "eshopmicro.discount.grpc": "StartDebugging",
+        "eshopmicro.ordering.api": "StartDebugging"
       }
     }
   }

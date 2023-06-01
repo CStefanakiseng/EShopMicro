@@ -10,6 +10,9 @@ services:
   eshopmicro_discount_db:
     image: postgres
 
+  eshopmicro_order_db:
+    image: mcr.microsoft.com/mssql/server
+  
   eshopmicro_pgadmin:
     image: dpage/pgadmin4
   
@@ -34,11 +37,25 @@ services:
       context: .
       dockerfile: Services/Discount/EShopMicro.Discount.API/Dockerfile
 
+  eshopmicro_discount_grpc:
+    image: ${DOCKER_REGISTRY-}eshopmicrodiscountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/EShopMicro.Discount.Grpc/Dockerfile
+
+  eshopmicro_ordering_api:
+    image: ${DOCKER_REGISTRY-}eshopmicroorderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/EShopMicro.Ordering.API/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
   
+
+
 
 

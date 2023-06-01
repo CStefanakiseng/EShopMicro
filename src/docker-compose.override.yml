@@ -28,6 +28,20 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data  
   
+  eshopmicro_order_db:
+    container_name: eshopmicro_order_db
+    environment:
+        SA_PASSWORD: "System123!"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "2433:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+
+  
   eshopmicro_pgadmin:
     container_name: eshopmicro_pgadmin
     environment:
@@ -64,6 +78,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=eshopmicro_basket_db:6379"
+      - "GrpcSettings:DiscountUrl=http://eshopmicro_discount_grpc"
     depends_on:
       - eshopmicro_basket_db
     ports:
@@ -78,4 +93,26 @@ services:
       - eshopmicro_discount_db
     ports:
       - "19012:80"
+
+
+  eshopmicro_discount_grpc:
+    container_name: eshopmicro_discount_grpc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=Server=eshopmicro_discount_db;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234"        
+    depends_on:
+      - eshopmicro_discount_db
+    ports:
+      - "19013:80"      
+   
+
+  eshopmicro_ordering_api:
+    container_name: eshopmicro_ordering_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderingConnectionString=Server=eshopmicro_order_db;Database=EShopMicro.Ordering;User Id=sa;Password=System123!;TrustServerCertificate=true" 
+    depends_on:
+      - eshopmicro_order_db
+    ports:
+      - "19014:80"
 
