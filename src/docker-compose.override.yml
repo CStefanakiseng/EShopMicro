@@ -6,7 +6,7 @@ services:
     container_name: eshopmicro_catalog_db  
     restart: always
     ports:
-      - "27017:27017"
+      - "18010:27017"
     volumes:
       - mongo_data:/data/db      
 
@@ -14,7 +14,7 @@ services:
     container_name: eshopmicro_basket_db
     restart: always
     ports: 
-      - "6379:6379"
+      - "18011:6379"
 
   eshopmicro_discount_db:
     container_name: eshopmicro_discount_db
@@ -24,7 +24,7 @@ services:
       - POSTGRES_DB=DiscountDb
     restart: always
     ports: 
-      - "15432:5432"
+      - "18012:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data  
   
@@ -35,12 +35,24 @@ services:
         ACCEPT_EULA: "Y"
     restart: always
     ports:
-        - "2433:1433"
+        - "18014:1433"
     volumes:
       - ./data:/var/opt/mssql/data
       - ./log:/var/opt/mssql/log
       - ./secrets:/var/opt/mssql/secrets
 
+  eshopmicro_rabbitmq:
+    container_name: eshopmicro_rabbitmq    
+    restart: always
+    ports:
+        - "18004:5672"
+        - "18005:15672"
+   
+  eshopmicro_mongoclient:
+    container_name: eshopmicro_mongoclient
+    restart: always
+    ports:
+        - "18006:3000"
   
   eshopmicro_pgadmin:
     container_name: eshopmicro_pgadmin
@@ -49,7 +61,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin1234
     restart: always
     ports:
-      - "15050:80"
+      - "18003:80"
     volumes:
       - pgadmin_data:/root/.pgadmin
 
@@ -57,8 +69,8 @@ services:
     container_name: eshopmicro_portainer
     restart: always
     ports: 
-      - "18000:8000"
-      - "19000:9000"
+      - "18001:8000"
+      - "18002:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data

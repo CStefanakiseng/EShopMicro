@@ -13,6 +13,12 @@ services:
   eshopmicro_order_db:
     image: mcr.microsoft.com/mssql/server
   
+  eshopmicro_rabbitmq:
+    image: rabbitmq:management-alpine
+  
+  eshopmicro_mongoclient:
+    image: mongoclient/mongoclient
+
   eshopmicro_pgadmin:
     image: dpage/pgadmin4
   
