@@ -94,6 +94,7 @@ services:
       - "EventBusSettings:HostAddress=amqp://guest:guest@eshopmicro_rabbitmq:5672"
     depends_on:
       - eshopmicro_basket_db
+      - eshopmicro_rabbitmq
     ports:
       - "19011:80"
 
@@ -127,6 +128,7 @@ services:
       - "EventBusSettings:HostAddress=amqp://guest:guest@eshopmicro_rabbitmq:5672" 
     depends_on:
       - eshopmicro_order_db
+      - eshopmicro_rabbitmq
     ports:
       - "19014:80"
 
