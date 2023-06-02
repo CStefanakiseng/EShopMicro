@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Services/Basket/EShopMicro.Basket.API/EShopMicro.Basket.API.csproj", "Services/Basket/EShopMicro.Basket.API/"]
+COPY ["BuildingBlocks/EShopMicro.EventBus.Messages/EShopMicro.EventBus.Messages.csproj", "BuildingBlocks/EShopMicro.EventBus.Messages/"]
 RUN dotnet restore "Services/Basket/EShopMicro.Basket.API/EShopMicro.Basket.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Basket/EShopMicro.Basket.API"

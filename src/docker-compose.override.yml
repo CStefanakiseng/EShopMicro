@@ -91,6 +91,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=eshopmicro_basket_db:6379"
       - "GrpcSettings:DiscountUrl=http://eshopmicro_discount_grpc"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@eshopmicro_rabbitmq:5672"
     depends_on:
       - eshopmicro_basket_db
     ports:
@@ -123,6 +124,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:OrderingConnectionString=Server=eshopmicro_order_db;Database=EShopMicro.Ordering;User Id=sa;Password=System123!;TrustServerCertificate=true" 
+      - "EventBusSettings:HostAddress=amqp://guest:guest@eshopmicro_rabbitmq:5672" 
     depends_on:
       - eshopmicro_order_db
     ports:

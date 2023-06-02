@@ -10,6 +10,7 @@ COPY ["Services/Ordering/EShopMicro.Ordering.API/EShopMicro.Ordering.API.csproj"
 COPY ["Services/Ordering/EShopMicro.Ordering.Application/EShopMicro.Ordering.Application.csproj", "Services/Ordering/EShopMicro.Ordering.Application/"]
 COPY ["Services/Ordering/EShopMicro.Ordering.Domain/EShopMicro.Ordering.Domain.csproj", "Services/Ordering/EShopMicro.Ordering.Domain/"]
 COPY ["Services/Ordering/EShopMicro.Ordering.Infrastructure/EShopMicro.Ordering.Infrastructure.csproj", "Services/Ordering/EShopMicro.Ordering.Infrastructure/"]
+COPY ["BuildingBlocks/EShopMicro.EventBus.Messages/EShopMicro.EventBus.Messages.csproj", "BuildingBlocks/EShopMicro.EventBus.Messages/"]
 RUN dotnet restore "Services/Ordering/EShopMicro.Ordering.API/EShopMicro.Ordering.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Ordering/EShopMicro.Ordering.API"
