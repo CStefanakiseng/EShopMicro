@@ -132,3 +132,16 @@ services:
     ports:
       - "19014:80"
 
+
+  eshopmicro_ocelotapigateway:
+    container_name: eshopmicro_ocelotapigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - eshopmicro_catalog_api
+      - eshopmicro_basket_api
+      - eshopmicro_discount_api
+      - eshopmicro_ordering_api
+    ports:
+      - "19015:80"
+

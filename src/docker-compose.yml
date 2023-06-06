@@ -55,12 +55,19 @@ services:
       context: .
       dockerfile: Services/Ordering/EShopMicro.Ordering.API/Dockerfile
 
+  eshopmicro_ocelotapigateway:
+    image: ${DOCKER_REGISTRY-}eshopmicroocelotapigateway
+    build:
+      context: .
+      dockerfile: APIGateways/EShopMicro.OcelotAPIGateway/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
   
+
 
 
 
