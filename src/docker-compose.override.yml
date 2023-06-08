@@ -145,3 +145,32 @@ services:
     ports:
       - "19015:80"
 
+
+  eshopmicro_shoppingaggregator:
+    container_name: eshopmicro_shoppingaggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:CatalogUrl=http://eshopmicro_catalog_api"
+      - "ApiSettings:BasketUrl=http://eshopmicro_basket_api"
+      - "ApiSettings:OrderingUrl=http://eshopmicro_ordering_api"
+    depends_on:
+      - eshopmicro_catalog_api
+      - eshopmicro_basket_api
+      - eshopmicro_ordering_api
+    ports:
+      - "19016:80"
+
+
+  eshopmicro_webapp:
+    container_name: eshopmicro_webapp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:GatewayAddress=http://eshopmicro_ocelotapigateway"
+    depends_on:
+      - eshopmicro_catalog_api
+      - eshopmicro_basket_api
+      - eshopmicro_discount_api
+      - eshopmicro_ordering_api
+      - eshopmicro_ocelotapigateway 
+    ports:
+      - "19017:80"

@@ -61,12 +61,26 @@ services:
       context: .
       dockerfile: APIGateways/EShopMicro.OcelotAPIGateway/Dockerfile
 
+  eshopmicro_shoppingaggregator:
+    image: ${DOCKER_REGISTRY-}eshopmicroshoppingaggregator
+    build:
+      context: .
+      dockerfile: APIGateways/EShopMicro.ShoppingAggregator/Dockerfile
+
+  eshopmicro_webapp:
+    image: ${DOCKER_REGISTRY-}eshopmicrowebapp
+    build:
+      context: .
+      dockerfile: ClientApps/EShopMicro.WebApp/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
   
+
+
 
 
 

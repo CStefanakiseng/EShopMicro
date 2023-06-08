@@ -9,7 +9,9 @@
         "eshopmicro.discount.api": "StartDebugging",
         "eshopmicro.discount.grpc": "StartDebugging",
         "eshopmicro.ordering.api": "StartDebugging",
-        "eshopmicro.ocelotapigateway": "StartDebugging"
+        "eshopmicro.ocelotapigateway": "StartDebugging",
+        "eshopmicro.shoppingaggregator": "StartDebugging",
+        "eshopmicro.webapp": "StartDebugging"
       }
     }
   }
